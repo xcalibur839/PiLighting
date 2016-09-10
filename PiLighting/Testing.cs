@@ -52,6 +52,8 @@ namespace PiLighting
 				FlashTest (true, Lights.WhiteLights);
 				break;
 			}
+
+			Console.WriteLine ("********** End Test **********");
 		}
 
 		static void FlashTest(bool all, List<PinControl> lightController)

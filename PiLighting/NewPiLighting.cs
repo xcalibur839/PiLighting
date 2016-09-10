@@ -7,8 +7,9 @@ namespace PiLighting
 	{
 		static PinControl Button = new PinControl (2, false, "Button");
 		static LightControl Lights = new LightControl ();
+		static Effect Effects = new Effect(ref Lights);
 
-		static bool ExitOrOption()
+		static bool OptionOrExit() //Return true to continue execution
 		{
 			switch (Console.ReadKey ().Key)
 			{
@@ -21,15 +22,27 @@ namespace PiLighting
 				return true;
 			case ConsoleKey.W:
 				Console.WriteLine ();
+				Lights.BlackOff ();
 				Lights.WhiteOn ();
 				return true;
 			case ConsoleKey.B:
 				Console.WriteLine ();
+				Lights.WhiteOff ();
 				Lights.BlackOn ();
 				return true;
 			case ConsoleKey.O:
 				Console.WriteLine ();
 				Lights.Off ();
+				return true;
+			case ConsoleKey.A:
+				Console.WriteLine ();
+				Lights.AllOn ();
+				return true;
+			case ConsoleKey.L:
+				Effects.Lightning ();
+				return true;
+			case ConsoleKey.M:
+				Effects.Marquee ();
 				return true;
 			default:
 				Console.WriteLine ();
@@ -44,7 +57,7 @@ namespace PiLighting
 			Button.Initialize ();
 			Lights.Initialize ();
 
-			for (int i = 0; !Console.KeyAvailable || ExitOrOption(); i++)
+			for (int i = 0; !Console.KeyAvailable || OptionOrExit(); i++)
 			{
 				if (Button.isOn && !buttonHandled) 
 				{
@@ -61,13 +74,25 @@ namespace PiLighting
 					case LightStates.BlackOn:
 						Lights.Off();
 						break;
+					default:
+						Lights.Off ();
+						break;
 					}
 				}
 
-				if (!Button.isOn && buttonHandled) 
+				if (!Button.isOn && buttonHandled)
 				{
-					Thread.Sleep(30);
+					Thread.Sleep (30);
 					buttonHandled = false;
+				}
+
+				if (!Button.isOn && !buttonHandled) //This should never occur under normal circumstances
+				{
+					Console.WriteLine ("*****************************************************************");
+					Console.WriteLine ("A fatal error occurred when attempting to read the button state");
+					Console.WriteLine ("This program will now close");
+					Console.WriteLine ("*****************************************************************");
+					return;
 				}
 			}
 

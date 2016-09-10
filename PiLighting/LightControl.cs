@@ -7,7 +7,9 @@ namespace PiLighting
 	{
 		Off,
 		WhiteOn,
-		BlackOn
+		BlackOn,
+		AllOn,
+		Undefined
 	}
 
 	class LightControl
@@ -54,7 +56,13 @@ namespace PiLighting
 			{
 				light.isOn = true;
 			}
-			foreach (var light in BlackLights) 
+		}
+
+		public void WhiteOff()
+		{
+			Console.WriteLine("Turning off White Lights");
+			LightState = LightStates.Undefined;
+			foreach (var light in WhiteLights) 
 			{
 				light.isOn = false;
 			}
@@ -64,14 +72,30 @@ namespace PiLighting
 		{
 			Console.WriteLine("Turning on Black Lights");
 			LightState = LightStates.BlackOn;
-			foreach (var light in WhiteLights) 
-			{
-				light.isOn = false;
-			}
+
 			foreach (var light in BlackLights) 
 			{
 				light.isOn = true;
 			}
+		}
+
+		public void BlackOff()
+		{
+			Console.WriteLine("Turning off Black Lights");
+			LightState = LightStates.Undefined;
+
+			foreach (var light in BlackLights) 
+			{
+				light.isOn = false;
+			}
+		}
+
+		public void AllOn()
+		{
+			LightState = LightStates.AllOn;
+
+			WhiteOn ();
+			BlackOn ();
 		}
 
 		public void Off()

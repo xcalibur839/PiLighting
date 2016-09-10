@@ -36,5 +36,6 @@
     <Compile Include="NewPiLighting.cs" />
     <Compile Include="PinControl.cs" />
     <Compile Include="Testing.cs" />
+    <Compile Include="Effect.cs" />
   </ItemGroup>
 </Project>
