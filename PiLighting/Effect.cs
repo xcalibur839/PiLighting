@@ -38,19 +38,51 @@ namespace PiLighting
 
 		public void Marquee()
 		{
+			int delay = 200;
 			Lights.Off ();
 
-			Lights.WhiteLights [0].isOn = true;
-			Lights.WhiteLights [2].isOn = true;
-			Thread.Sleep (500);
-			Lights.BlackLights [2].isOn = true;
-			Lights.BlackLights [6].isOn = true;
-			Thread.Sleep (500);
-			Lights.BlackLights [0].isOn = true;
-			Lights.BlackLights [7].isOn = true;
-			Thread.Sleep (500);
-			Lights.WhiteLights [1].isOn = true;
-			Lights.WhiteLights [3].isOn = true;
+			for (int i = 0; i < 4; i++)
+			{
+				Lights.WhiteLights [0].isOn = true;
+				Lights.WhiteLights [2].isOn = true;
+				Thread.Sleep (delay);
+				Lights.BlackLights [2].isOn = true;
+				Lights.BlackLights [6].isOn = true;
+				Thread.Sleep (delay);
+				Lights.BlackLights [4].isOn = true;
+				//Lights.BlackLights [7].isOn = true;
+				Thread.Sleep (delay);
+				Lights.BlackLights [1].isOn = true;
+				//Lights.BlackLights [7].isOn = true;
+				Thread.Sleep (delay);
+				Lights.BlackLights [0].isOn = true;
+				Lights.BlackLights [7].isOn = true;
+				Thread.Sleep (delay);
+				Lights.WhiteLights [1].isOn = true;
+				Lights.WhiteLights [3].isOn = true;
+
+				Thread.Sleep (delay * 2);
+
+				Lights.WhiteLights [1].isOn = false;
+				Lights.WhiteLights [3].isOn = false;
+				Thread.Sleep (delay);
+				Lights.BlackLights [0].isOn = false;
+				Lights.BlackLights [7].isOn = false;
+				Thread.Sleep (delay);
+				Lights.BlackLights [1].isOn = false;
+				//Lights.BlackLights [7].isOn = true;
+				Thread.Sleep (delay);
+				Lights.BlackLights [4].isOn = false;
+				//Lights.BlackLights [7].isOn = true;
+				Thread.Sleep (delay);
+				Lights.BlackLights [2].isOn = false;
+				Lights.BlackLights [6].isOn = false;
+				Thread.Sleep (delay);
+				Lights.WhiteLights [0].isOn = false;
+				Lights.WhiteLights [2].isOn = false;
+
+				Thread.Sleep (delay * 2);
+			}
 		}
 	}
 }
