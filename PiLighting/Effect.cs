@@ -5,6 +5,7 @@ namespace PiLighting
 {
 	class Effect
 	{
+		const int MARQUEE_COUNT = 2;
 		static Random random = new Random ();
 		LightControl Lights;
 
@@ -15,10 +16,9 @@ namespace PiLighting
 
 		public void Lightning()
 		{
-			Lights.Off ();
-			Console.WriteLine ("********** Begin Lighting Effect **********");
-
 			int flashCount = random.Next (2, 7) * 2;
+			Lights.Off ();
+			Console.WriteLine ("********** Begin Lightning Effect **********");
 			for (int i = 0; i < flashCount; i++)
 			{
 				foreach (var light in Lights.BlackLights)
@@ -33,57 +33,61 @@ namespace PiLighting
 				}
 				Thread.Sleep (random.Next(5, 20));
 			}
-			Console.WriteLine ("********** End Lighting Effect **********");
+			Console.WriteLine ("********** End Lightning Effect **********");
 		}
 
 		public void Marquee()
 		{
 			int delay = 200;
+			int index = 0;
+			int[] bottomUpLightOrder = {
+				0, 2,
+				2, 6,
+				4, 5, //5 is a placeholder for now
+				1, 5,
+				0, 7,
+				1, 3
+			};
+
 			Lights.Off ();
+			Console.WriteLine ("********** Begin Marquee Effect **********");
 
-			for (int i = 0; i < 4; i++)
+			for (int i = 0; i < MARQUEE_COUNT; i++)
 			{
-				Lights.WhiteLights [0].isOn = true;
-				Lights.WhiteLights [2].isOn = true;
+				Lights.WhiteLights [bottomUpLightOrder [index]].isOn = !Lights.WhiteLights [bottomUpLightOrder [index++]].isOn;
+				Lights.WhiteLights [bottomUpLightOrder [index]].isOn = !Lights.WhiteLights [bottomUpLightOrder [index++]].isOn;
 				Thread.Sleep (delay);
-				Lights.BlackLights [2].isOn = true;
-				Lights.BlackLights [6].isOn = true;
-				Thread.Sleep (delay);
-				Lights.BlackLights [4].isOn = true;
-				//Lights.BlackLights [7].isOn = true;
-				Thread.Sleep (delay);
-				Lights.BlackLights [1].isOn = true;
-				//Lights.BlackLights [7].isOn = true;
-				Thread.Sleep (delay);
-				Lights.BlackLights [0].isOn = true;
-				Lights.BlackLights [7].isOn = true;
-				Thread.Sleep (delay);
-				Lights.WhiteLights [1].isOn = true;
-				Lights.WhiteLights [3].isOn = true;
 
-				Thread.Sleep (delay * 2);
+				for (int j = 0; j < 4; j++)
+				{
+					Lights.BlackLights [bottomUpLightOrder [index]].isOn = !Lights.BlackLights [bottomUpLightOrder [index++]].isOn;
+					Lights.BlackLights [bottomUpLightOrder [index]].isOn = !Lights.BlackLights [bottomUpLightOrder [index++]].isOn;
+					Thread.Sleep (delay);
+				}
 
-				Lights.WhiteLights [1].isOn = false;
-				Lights.WhiteLights [3].isOn = false;
-				Thread.Sleep (delay);
-				Lights.BlackLights [0].isOn = false;
-				Lights.BlackLights [7].isOn = false;
-				Thread.Sleep (delay);
-				Lights.BlackLights [1].isOn = false;
-				//Lights.BlackLights [7].isOn = true;
-				Thread.Sleep (delay);
-				Lights.BlackLights [4].isOn = false;
-				//Lights.BlackLights [7].isOn = true;
-				Thread.Sleep (delay);
-				Lights.BlackLights [2].isOn = false;
-				Lights.BlackLights [6].isOn = false;
-				Thread.Sleep (delay);
-				Lights.WhiteLights [0].isOn = false;
-				Lights.WhiteLights [2].isOn = false;
+				Lights.WhiteLights [bottomUpLightOrder [index]].isOn = !Lights.WhiteLights [bottomUpLightOrder [index++]].isOn;
+				Lights.WhiteLights [bottomUpLightOrder [index]].isOn = !Lights.WhiteLights [bottomUpLightOrder [index]].isOn;
 
-				Thread.Sleep (delay * 2);
+				Thread.Sleep (delay * 3);
+
+				Lights.WhiteLights [bottomUpLightOrder [index]].isOn = !Lights.WhiteLights [bottomUpLightOrder [index--]].isOn;
+				Lights.WhiteLights [bottomUpLightOrder [index]].isOn = !Lights.WhiteLights [bottomUpLightOrder [index--]].isOn;
+				Thread.Sleep (delay);
+
+				for (int j = 0; j < 4; j++)
+				{
+					Lights.BlackLights [bottomUpLightOrder [index]].isOn = !Lights.BlackLights [bottomUpLightOrder [index--]].isOn;
+					Lights.BlackLights [bottomUpLightOrder [index]].isOn = !Lights.BlackLights [bottomUpLightOrder [index--]].isOn;
+					Thread.Sleep (delay);
+				}
+
+				Lights.WhiteLights [bottomUpLightOrder [index]].isOn = !Lights.WhiteLights [bottomUpLightOrder [index--]].isOn;
+				Lights.WhiteLights [bottomUpLightOrder [index]].isOn = !Lights.WhiteLights [bottomUpLightOrder [index]].isOn;
+
+				Thread.Sleep (delay * 3);
 			}
+
+			Console.WriteLine ("********** End Marquee Effect **********");
 		}
 	}
 }
-
