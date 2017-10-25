@@ -3,101 +3,125 @@ using System.Threading;
 
 namespace PiLighting
 {
-	partial class Program
-	{
-		static PinControl Button = new PinControl (2, false, "Button");
-		static LightControl Lights = new LightControl ();
-		static Effect Effects = new Effect(ref Lights);
+    partial class Program
+    {
+        static PinControl Button;
+        static LightControl Lights;
+        static Effect Effects;
 
-		static bool OptionOrExit() //Return true to continue execution
-		{
-			switch (Console.ReadKey ().Key)
-			{
-			case ConsoleKey.Q:
-				Console.WriteLine ();
-				return false;
-			case ConsoleKey.T:
-				Console.WriteLine ();
-				Test ();
-				return true;
-			case ConsoleKey.W:
-				Console.WriteLine ();
-				Lights.BlackOff ();
-				Lights.WhiteOn ();
-				return true;
-			case ConsoleKey.B:
-				Console.WriteLine ();
-				Lights.WhiteOff ();
-				Lights.BlackOn ();
-				return true;
-			case ConsoleKey.O:
-				Console.WriteLine ();
-				Lights.Off ();
-				return true;
-			case ConsoleKey.A:
-				Console.WriteLine ();
-				Lights.AllOn ();
-				return true;
-			case ConsoleKey.L:
-				Effects.Lightning ();
-				return true;
-			case ConsoleKey.M:
-				Effects.Marquee ();
-				return true;
-			default:
-				Console.WriteLine ();
-				return true;
-			}
-		}
+        static bool OptionOrExit() //Return true to continue execution
+        {
+            switch (Console.ReadKey().Key)
+            {
+                case ConsoleKey.Q:
+                    Console.WriteLine();
+                    return false;
+                case ConsoleKey.T:
+                    Console.WriteLine();
+                    Test();
+                    return true;
+                case ConsoleKey.W:
+                    Console.WriteLine();
+                    Lights.BlackOff();
+                    Lights.WhiteOn();
+                    return true;
+                case ConsoleKey.B:
+                    Console.WriteLine();
+                    Lights.WhiteOff();
+                    Lights.BlackOn();
+                    return true;
+                case ConsoleKey.O:
+                    Console.WriteLine();
+                    Lights.Off();
+                    return true;
+                case ConsoleKey.A:
+                    Console.WriteLine();
+                    Lights.AllOn();
+                    return true;
+                case ConsoleKey.L:
+                    Effects.Lightning();
+                    return true;
+                case ConsoleKey.M:
+                    Effects.Marquee();
+                    return true;
+                default:
+                    Console.WriteLine();
+                    return true;
+            }
+        }
 
-		public static void Main()
-		{
-			bool buttonHandled = false;
+        public static void Main(string[] args)
+        {
+            bool buttonHandled = false;
 
-			Button.Initialize ();
-			Lights.Initialize ();
+            //Locate and load the configuation file.
+            //Default is Config.xml but also supports custom config XML file with command line parameter
+            string file = "Config.xml";
+            foreach (string arg in args)
+            {
+                if (arg.ToLower().EndsWith(".xml"))
+                {
+                    file = arg;
+                }
+            }
 
-			for (int i = 0; !Console.KeyAvailable || OptionOrExit(); i++)
-			{
-				if (Button.isOn && !buttonHandled) 
-				{
-					buttonHandled = true;
+            //Attempt to load the config file
+            Config.Load(file);
+            if (!Config.ConfigLoaded)
+            {
+                Console.WriteLine("Using hard-coded defaults. Press enter to continue...");
+                Console.ReadLine();
+            }
 
-					switch (Lights.LightState)
-					{
-					case LightStates.Off:
-						Lights.WhiteOn();
-						break;
-					case LightStates.WhiteOn:
-						Lights.BlackOn();
-						break;
-					case LightStates.BlackOn:
-						Lights.Off();
-						break;
-					default:
-						Lights.Off ();
-						break;
-					}
-				}
+            Button = new PinControl(2, false, "Button");
+            Lights = new LightControl();
+            Effects = new Effect(ref Lights);
 
-				if (!Button.isOn && buttonHandled)
-				{
-					Thread.Sleep (30);
-					buttonHandled = false;
-				}
+            Button.Initialize();
+            Lights.Initialize();
 
-				if (!Button.isOn && !buttonHandled) //This should never occur under normal circumstances
-				{
-					Console.WriteLine ("*****************************************************************");
-					Console.WriteLine ("A fatal error occurred when attempting to read the button state");
-					Console.WriteLine ("This program will now close");
-					Console.WriteLine ("*****************************************************************");
-					return;
-				}
-			}
+            while (!Console.KeyAvailable || OptionOrExit())
+            {
+                if (Button.isOn && !buttonHandled)
+                {
+                    buttonHandled = true;
 
-			Button.Dispose ();
-			Lights.Dispose ();
-		}
-	}
+                    switch (Lights.LightState)
+                    {
+                        case LightStates.Off:
+                            Lights.WhiteOn();
+                            break;
+                        case LightStates.WhiteOn:
+                            Lights.BlackOn();
+                            break;
+                        case LightStates.BlackOn:
+                            Lights.Off();
+                            break;
+                        default:
+                            Lights.Off();
+                            break;
+                    }
+                }
+
+                if (!Button.isOn && buttonHandled)
+                {
+                    Thread.Sleep(30);
+                    buttonHandled = false;
+                }
+
+                if (!Button.isOn && !buttonHandled) //This should never occur under normal circumstances
+                {
+                    Console.WriteLine("*****************************************************************");
+                    Console.WriteLine("A fatal error occurred when attempting to read the button state");
+                    Console.WriteLine("This program will now close");
+                    Console.WriteLine("*****************************************************************");
+                    break;
+                }
+            }
+
+            Button.Dispose();
+            Lights.Dispose();
+            Console.ReadLine();
+        }
+    }
 }

@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Config>
+  <Program SysGpioPath="/home/mike/code/PiLighting/testgpio/" />
+  <Lights>
+    <Light Name="Test1" Pin="1" Type="white" />
+    <Light Name="Test2" Pin="0" Type="black" />
+  </Lights>
+</Config>

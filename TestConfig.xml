@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Config>
+  <Program SysGpioPath="/home/mike/code/PiLighting/testgpio/" />
+  <Lights>
+    <Light Name="White1" Pin="4" Type="white" />
+    <Light Name="White2" Pin="14" Type="white" />
+    <Light Name="White3" Pin="15" Type="white" />
+    <Light Name="White4" Pin="18" Type="white" />
+    <Light Name="Black1" Pin="5" Type="black" />
+    <Light Name="Black2" Pin="6" Type="black" />
+    <Light Name="Black3" Pin="13" Type="black" />
+    <Light Name="Black4" Pin="16" Type="black" />
+    <Light Name="Black5" Pin="19" Type="black" />
+    <Light Name="Black6" Pin="20" Type="black" />
+    <Light Name="Black7" Pin="21" Type="black" />
+    <Light Name="Black8" Pin="26" Type="black" />
+  </Lights>
+</Config>

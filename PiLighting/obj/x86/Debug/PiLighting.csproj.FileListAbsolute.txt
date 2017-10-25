@@ -1,0 +1,5 @@
+C:\Users\xcali\playground\code\PiLighting\PiLighting\bin\Debug\PiLighting.exe.config
+C:\Users\xcali\playground\code\PiLighting\PiLighting\bin\Debug\PiLighting.exe
+C:\Users\xcali\playground\code\PiLighting\PiLighting\bin\Debug\PiLighting.pdb
+C:\Users\xcali\playground\code\PiLighting\PiLighting\obj\x86\Debug\PiLighting.exe
+C:\Users\xcali\playground\code\PiLighting\PiLighting\obj\x86\Debug\PiLighting.pdb

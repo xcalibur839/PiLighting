@@ -7,7 +7,7 @@ namespace PiLighting
 	class PinControl
 	{
 		string PINGPIOPATH = "";
-		public static readonly string SYSGPIOPATH = "/sys/class/gpio/";
+		static readonly string SYSGPIOPATH = Config.SysGpioPath;
 		public int Number {get; private set;}
 		public bool isOutput {get; private set;}
 		public string Name { get; private set; }
