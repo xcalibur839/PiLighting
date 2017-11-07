@@ -5,7 +5,7 @@ namespace PiLighting
 {
     partial class Program
     {
-        static PinControl Button;
+        static ButtonControl Buttons;
         static LightControl Lights;
         static Effect Effects;
 
@@ -73,53 +73,51 @@ namespace PiLighting
                 Console.ReadLine();
             }
 
-            Button = new PinControl(2, false, "Button");
+            Buttons = new ButtonControl();
             Lights = new LightControl();
             Effects = new Effect(ref Lights);
 
-            Button.Initialize();
+            Buttons.Initialize();
             Lights.Initialize();
 
             while (!Console.KeyAvailable || OptionOrExit())
             {
-                if (Button.isOn && !buttonHandled)
-                {
-                    buttonHandled = true;
+				if (Buttons.MainButtons.Count > 0) {
+					if (Buttons.MainButtons [0].isOn && !buttonHandled) {
+						buttonHandled = true;
 
-                    switch (Lights.LightState)
-                    {
-                        case LightStates.Off:
-                            Lights.WhiteOn();
-                            break;
-                        case LightStates.WhiteOn:
-                            Lights.BlackOn();
-                            break;
-                        case LightStates.BlackOn:
-                            Lights.Off();
-                            break;
-                        default:
-                            Lights.Off();
-                            break;
-                    }
-                }
+						switch (Lights.LightState) {
+						case LightStates.Off:
+							Lights.WhiteOn ();
+							break;
+						case LightStates.WhiteOn:
+							Lights.BlackOn ();
+							break;
+						case LightStates.BlackOn:
+							Lights.Off ();
+							break;
+						default:
+							Lights.Off ();
+							break;
+						}
+					}
 
-                if (!Button.isOn && buttonHandled)
-                {
-                    Thread.Sleep(30);
-                    buttonHandled = false;
-                }
+					if (!Buttons.MainButtons [0].isOn && buttonHandled) {
+						Thread.Sleep (30);
+						buttonHandled = false;
+					}
 
-                if (!Button.isOn && !buttonHandled) //This should never occur under normal circumstances
-                {
-                    Console.WriteLine("*****************************************************************");
-                    Console.WriteLine("A fatal error occurred when attempting to read the button state");
-                    Console.WriteLine("This program will now close");
-                    Console.WriteLine("*****************************************************************");
-                    break;
-                }
+					if (!Buttons.MainButtons [0].isOn && !buttonHandled) { //This should never occur under normal circumstances
+						Console.WriteLine ("*****************************************************************");
+						Console.WriteLine ("A fatal error occurred when attempting to read the button state");
+						Console.WriteLine ("This program will now close");
+						Console.WriteLine ("*****************************************************************");
+						break;
+					}
+				}
             }
 
-            Button.Dispose();
+            Buttons.Dispose();
             Lights.Dispose();
             Console.ReadLine();
         }

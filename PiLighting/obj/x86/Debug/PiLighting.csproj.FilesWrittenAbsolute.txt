@@ -1,0 +1,9 @@
+/home/pi/code/PiLighting/PiLighting/obj/x86/Debug/.NETFramework,Version=v4.0.AssemblyAttribute.cs
+/home/pi/code/PiLighting/PiLighting/obj/x86/Debug/PiLighting.exe
+/home/pi/code/PiLighting/PiLighting/obj/x86/Debug/PiLighting.pdb
+/home/pi/code/PiLighting/PiLighting/obj/x86/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/home/pi/code/PiLighting/PiLighting/bin/Debug/PiLighting.exe.config
+/home/pi/code/PiLighting/PiLighting/bin/Debug/PiLighting.exe.mdb
+/home/pi/code/PiLighting/PiLighting/bin/Debug/PiLighting.pdb
+/home/pi/code/PiLighting/PiLighting/bin/Debug/PiLighting.exe
+/home/pi/code/PiLighting/PiLighting/obj/x86/Debug/PiLighting.exe.mdb

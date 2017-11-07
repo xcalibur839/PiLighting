@@ -12,9 +12,9 @@ namespace PiLighting
 		public bool isOutput {get; private set;}
 		public string Name { get; private set; }
 
-		void PrintMessage(string message, string extraMessage = "")
+		void PrintMessage(string message)
 		{
-			Console.WriteLine ("Pin{0:d2}: " + Name + " - " + message, Number, extraMessage);
+			Console.WriteLine ("{0}({1:d2}): {2}", Name, Number, message);
 		}
 
 		public PinControl(int num, bool isOut, string name)
@@ -42,7 +42,7 @@ namespace PiLighting
 			try
 			{
 				File.WriteAllText (PINGPIOPATH + "direction", isOutput ? "out" : "in");
-				PrintMessage("set as {1} pin", isOutput ? "output" : "input");
+				PrintMessage(string.Format("set as {0} pin", isOutput ? "output" : "input"));
 			} 
 			catch
 			{
@@ -83,7 +83,7 @@ namespace PiLighting
 				try
 				{
 					File.WriteAllText (PINGPIOPATH + "value", value ? "1" : "0");
-					PrintMessage("is now {1}", value ? "on" : "off");
+					PrintMessage(string.Format("is now {0}", value ? "on" : "off"));
 				} 
 				catch
 				{

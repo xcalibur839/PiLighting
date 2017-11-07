@@ -24,7 +24,7 @@ namespace PiLighting
             {
                 foreach (var light in Config.lightConfigList)
                 {
-                    Console.WriteLine("Found a {0} light named {1}", light.Type == lightType.black ? "black" : "white", light.Name);
+					Console.WriteLine("Found a {0} light: {1}({2})", light.Type == lightType.black ? "black" : "white", light.Name, light.Pin);
                     if (light.Type == lightType.black)
                     {
                         BlackLights.Add(new PinControl(light.Pin, true, light.Name));
@@ -36,6 +36,7 @@ namespace PiLighting
                 }
             }
 
+			/*
             if (WhiteLights.Count == 0)
             {
                 Console.WriteLine("No white lights found. Adding hard-coded defaults");
@@ -57,6 +58,7 @@ namespace PiLighting
                 BlackLights.Add(new PinControl(21, true, "Black7"));
                 BlackLights.Add(new PinControl(26, true, "Black8"));
             }
+            */
 		}
 
 		public void Initialize()
