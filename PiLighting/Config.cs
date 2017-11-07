@@ -20,17 +20,17 @@ namespace PiLighting
         public int Pin;
         public lightType Type;
     }
-	struct buttonConfig
-	{
-		public string Name;
-		public int Pin;
-	}
+    struct buttonConfig
+    {
+        public string Name;
+        public int Pin;
+    }
 
     static class Config
     {
         public static string SysGpioPath = "/sys/class/gpio/";
         public static IEnumerable<lightConfig> lightConfigList { get; private set; }
-		public static IEnumerable<buttonConfig> buttonConfigList { get; private set; }
+        public static IEnumerable<buttonConfig> buttonConfigList { get; private set; }
         public static bool ConfigLoaded = false;
 
         public static void Load(string file = "Config.xml")
@@ -50,14 +50,14 @@ namespace PiLighting
                             Pin = int.Parse(elem.Attribute("Pin").Value),
                             Type = elem.Attribute("Type").Value == "black" ? lightType.black : lightType.white
                         };
-					buttonConfigList = 
-						from elem in configFile.Descendants("Buttons").Descendants("Button")
-						orderby elem.Attribute("Name").Value
-						select new buttonConfig
-					{
-						Name = elem.Attribute("Name").Value,
-						Pin = int.Parse(elem.Attribute("Pin").Value)
-					};
+                    buttonConfigList =
+                        from elem in configFile.Descendants("Buttons").Descendants("Button")
+                        orderby elem.Attribute("Name").Value
+                        select new buttonConfig
+                        {
+                            Name = elem.Attribute("Name").Value,
+                            Pin = int.Parse(elem.Attribute("Pin").Value)
+                        };
                     ConfigLoaded = true;
                 }
                 catch
