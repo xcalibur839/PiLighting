@@ -24,7 +24,7 @@ namespace PiLighting
             {
                 foreach (var light in Config.lightConfigList)
                 {
-                    Console.WriteLine("Found a {0} light: {1}({2})", light.Type == lightType.black ? "black" : "white", light.Name, light.Pin);
+                    Console.WriteLine("Found a {0} light: {1}({2})", light.Type.ToString(), light.Name, light.Pin);
                     if (light.Type == lightType.black)
                     {
                         BlackLights.Add(new PinControl(light.Pin, true, light.Name));

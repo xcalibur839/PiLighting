@@ -3,3 +3,5 @@ C:\Users\xcali\playground\code\PiLighting\PiLighting\bin\Debug\PiLighting.exe
 C:\Users\xcali\playground\code\PiLighting\PiLighting\bin\Debug\PiLighting.pdb
 C:\Users\xcali\playground\code\PiLighting\PiLighting\obj\x86\Debug\PiLighting.exe
 C:\Users\xcali\playground\code\PiLighting\PiLighting\obj\x86\Debug\PiLighting.pdb
+C:\Users\xcali\playground\code\PiLighting\PiLighting\obj\x86\Debug\PiLighting.csprojResolveAssemblyReference.cache
+C:\Users\xcali\playground\code\PiLighting\PiLighting\obj\x86\Debug\PiLighting.csproj.CoreCompileInputs.cache

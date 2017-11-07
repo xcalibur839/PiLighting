@@ -8,6 +8,6 @@
     <Light Name="Red2" Pin="19" Type="black" />
   </Lights>
   <Buttons>
-    <!--Button Name="Button" Pin="2" /-->
+    <Button Name="Button1" Pin="2" />
   </Buttons>
 </Config>

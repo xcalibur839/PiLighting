@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.IO;
 using System.Xml.Linq;
-using System.Xml;
 
 namespace PiLighting
 {
     enum lightType
     {
         black,
-        white
+        white,
+        blue,
+        red
     }
 
     struct lightConfig
@@ -48,7 +48,7 @@ namespace PiLighting
                         {
                             Name = elem.Attribute("Name").Value,
                             Pin = int.Parse(elem.Attribute("Pin").Value),
-                            Type = elem.Attribute("Type").Value == "black" ? lightType.black : lightType.white
+                            Type = (lightType) Enum.Parse(typeof(lightType), elem.Attribute("Type").Value)
                         };
                     buttonConfigList =
                         from elem in configFile.Descendants("Buttons").Descendants("Button")
