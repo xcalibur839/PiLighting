@@ -69,8 +69,9 @@ namespace PiLighting
             Config.Load(file);
             if (!Config.ConfigLoaded)
             {
-                Console.WriteLine("Using hard-coded defaults. Press enter to continue...");
+                Console.WriteLine("Can't start without Config file. Press enter to exit...");
                 Console.ReadLine();
+                return;
             }
 
             Buttons = new ButtonControl();

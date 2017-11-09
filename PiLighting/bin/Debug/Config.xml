@@ -2,17 +2,108 @@
 <Config>
   <Program SysGpioPath="/sys/class/gpio/" />
   <Lights>
-    <Light Name="White1" Pin="4" Type="white" />
-    <Light Name="White2" Pin="14" Type="white" />
-    <Light Name="White3" Pin="15" Type="white" />
-    <Light Name="White4" Pin="18" Type="white" />
-    <Light Name="Black1" Pin="5" Type="black" />
-    <Light Name="Black2" Pin="6" Type="black" />
-    <Light Name="Black3" Pin="13" Type="black" />
-    <Light Name="Black4" Pin="16" Type="black" />
-    <Light Name="Black5" Pin="19" Type="black" />
-    <Light Name="Black6" Pin="20" Type="black" />
-    <Light Name="Black7" Pin="21" Type="black" />
-    <Light Name="Black8" Pin="26" Type="black" />
+    <Light Name="White1" Pin="16" Type="white" />
+    <Light Name="White2" Pin="20" Type="white" />
+    <Light Name="White3" Pin="12" Type="white" />
+    <Light Name="White4" Pin="21" Type="white" />
+    <Light Name="Black1" Pin="26" Type="black" />
+    <Light Name="Black2" Pin="19" Type="black" />
+    <Light Name="Black3" Pin="17" Type="black" />
+    <Light Name="Black4" Pin="27" Type="black" />
+    <Light Name="Black5" Pin="22" Type="black" />
+    <Light Name="Black6" Pin="5" Type="black" />
+    <Light Name="Black7" Pin="6" Type="black" />
+    <Light Name="Black8" Pin="13" Type="black" />
   </Lights>
+  <Buttons>
+    <!--Button Name="Button1" Pin="2" /-->
+  </Buttons>
+  <Effects>
+    <!-- <Effect Name="Bottom Up On">
+      <Steps>
+        <Step Number="1" Lights="White3,White4" Value="On" Delay="200" />
+        <Step Number="2" Lights="Black7,Black8" Value="On" Delay="200" />
+        <Step Number="3" Lights="Black5,Black6" Value="On" Delay="200" />
+        <Step Number="4" Lights="Black3,Black4" Value="On" Delay="200" />
+        <Step Number="5" Lights="Black1,Black2" Value="On" Delay="200" />
+        <Step Number="6" Lights="White1,White2" Value="On" Delay="600" />
+      </Steps>
+    </Effect>
+    <Effect Name="Bottom Up Off">
+      <Steps>
+        <Step Number="1" Lights="White3,White4" Value="Off" Delay="200" />
+        <Step Number="2" Lights="Black7,Black8" Value="Off" Delay="200" />
+        <Step Number="3" Lights="Black5,Black6" Value="Off" Delay="200" />
+        <Step Number="4" Lights="Black3,Black4" Value="Off" Delay="200" />
+        <Step Number="5" Lights="Black1,Black2" Value="Off" Delay="200" />
+        <Step Number="6" Lights="White1,White2" Value="Off" Delay="600" />
+      </Steps>
+    </Effect>
+    <Effect Name="Bottom Up On">
+      <Steps>
+        <Step Number="1" Lights="White3,White4" Value="On" Delay="200" />
+        <Step Number="2" Lights="Black7,Black8" Value="On" Delay="200" />
+        <Step Number="3" Lights="Black5,Black6" Value="On" Delay="200" />
+        <Step Number="4" Lights="Black3,Black4" Value="On" Delay="200" />
+        <Step Number="5" Lights="Black1,Black2" Value="On" Delay="200" />
+        <Step Number="6" Lights="White1,White2" Value="On" Delay="600" />
+      </Steps>
+    </Effect>
+    <Effect Name="Top Down Off">
+      <Steps>
+        <Step Number="1" Lights="White1,White2" Value="Off" Delay="200" />
+        <Step Number="2" Lights="Black1,Black2" Value="Off" Delay="200" />
+        <Step Number="3" Lights="Black3,Black4" Value="Off" Delay="200" />
+        <Step Number="4" Lights="Black5,Black6" Value="Off" Delay="200" />
+        <Step Number="5" Lights="Black7,Black8" Value="Off" Delay="200" />
+        <Step Number="6" Lights="White3,White4" Value="Off" Delay="600" />
+      </Steps>
+    </Effect>
+    <Effect Name="Right Left On">
+      <Steps>
+        <Step Number="1" Lights="White2,White4" Value="On" Delay="200" />
+        <Step Number="2" Lights="White1,White3" Value="On" Delay="200" />
+        <Step Number="3" Lights="Black2,Black4,Black6,Black8" Value="On" Delay="200" />
+        <Step Number="4" Lights="Black1,Black3,Black5,Black7" Value="On" Delay="600" />
+      </Steps>
+    </Effect>
+    <Effect Name="Right Left Off">
+      <Steps>
+        <Step Number="1" Lights="White2,White4" Value="Off" Delay="200" />
+        <Step Number="2" Lights="White1,White3" Value="Off" Delay="200" />
+        <Step Number="3" Lights="Black2,Black4,Black6,Black8" Value="Off" Delay="200" />
+        <Step Number="4" Lights="Black1,Black3,Black5,Black7" Value="Off" Delay="600" />
+      </Steps>
+    </Effect>
+    <Effect Name="Left Right On">
+      <Steps>
+        <Step Number="1" Lights="Black1,Black3,Black5,Black7" Value="On" Delay="200" />
+        <Step Number="2" Lights="Black2,Black4,Black6,Black8" Value="On" Delay="200" />
+        <Step Number="3" Lights="White1,White3" Value="On" Delay="200" />
+        <Step Number="4" Lights="White2,White4" Value="On" Delay="600" />
+      </Steps>
+    </Effect>
+    <Effect Name="Left Right Off">
+      <Steps>
+        <Step Number="1" Lights="Black1,Black3,Black5,Black7" Value="Off" Delay="200" />
+        <Step Number="2" Lights="Black2,Black4,Black6,Black8" Value="Off" Delay="200" />
+        <Step Number="3" Lights="White1,White3" Value="Off" Delay="200" />
+        <Step Number="4" Lights="White2,White4" Value="Off" Delay="600" />
+      </Steps>
+    </Effect>
+    <Effect Name="Full Left Right On">
+      <Steps>
+        <Step Number="1" Lights="Black1,Black3,Black5,Black7,White1,White3" Value="On" Delay="500" />
+        <Step Number="1" Lights="Black2,Black4,Black6,Black8,White2,White4" Value="On" Delay="500" />
+      </Steps>
+    </Effect> -->
+    <Effect Name="Outside In">
+      <Steps>
+        <Step Number="1" Lights="Black1,Black3,Black5,Black7,White2,White4" Value="On" Delay="1000" />
+        <Step Number="1" Lights="Black2,Black4,Black6,Black8,White1,White3" Value="On" Delay="1000" />
+        <Step Number="1" Lights="Black1,Black3,Black5,Black7,White2,White4" Value="Off" Delay="1000" />
+        <Step Number="1" Lights="Black2,Black4,Black6,Black8,White1,White3" Value="Off" Delay="1000" />
+      </Steps>
+    </Effect>
+  </Effects>
 </Config>

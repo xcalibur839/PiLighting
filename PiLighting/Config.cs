@@ -25,6 +25,18 @@ namespace PiLighting
         public string Name;
         public int Pin;
     }
+    class effectConfig
+    {
+        public string Name;
+        public IEnumerable<effectStep> Steps;
+    }
+    struct effectStep
+    {
+        public int Number;
+        public string[] Lights;
+        public bool On;
+        public int Delay;
+    }
 
     static class Config
     {
@@ -32,6 +44,7 @@ namespace PiLighting
         public static IEnumerable<lightConfig> lightConfigList { get; private set; }
         public static IEnumerable<buttonConfig> buttonConfigList { get; private set; }
         public static bool ConfigLoaded = false;
+        public static List<effectConfig> effectConfigList { get; private set; }
 
         public static void Load(string file = "Config.xml")
         {
@@ -58,11 +71,29 @@ namespace PiLighting
                             Name = elem.Attribute("Name").Value,
                             Pin = int.Parse(elem.Attribute("Pin").Value)
                         };
+                    effectConfigList = new List<effectConfig>();
+                    foreach(var effect in configFile.Element("Effects").Descendants("Effect"))
+                    {
+                        effectConfig fxConfig = new effectConfig();
+                        fxConfig.Name = effect.Attribute("Name").Value;
+                        fxConfig.Steps =
+                            from steps in effect.Descendants("Steps").Descendants("Step")
+                            orderby int.Parse(steps.Attribute("Number").Value)
+                            select new effectStep
+                            {
+                                Number = int.Parse(steps.Attribute("Number").Value),
+                                Lights = steps.Attribute("Lights").Value.Split(','),
+                                On = steps.Attribute("Value").Value.ToLower() == "on" ? true : false,
+                                Delay = int.Parse(steps.Attribute("Delay").Value)
+                            };
+                        effectConfigList.Add(fxConfig);
+                    }
                     ConfigLoaded = true;
                 }
-                catch
+                catch (Exception ex)
                 {
                     Console.WriteLine("Error loading XML data. Please try loading a different config file.");
+                    Console.WriteLine(ex.Message);
                 }
             }
             else

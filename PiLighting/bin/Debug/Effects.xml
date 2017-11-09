@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Effects>
+  <Effect Name="Bottom Up Marquee">
+    <Steps>
+      <Step Number="1" Lights="White3,White4" Value="On" Delay="200" />
+      <Step Number="2" Lights="Black7,Black8" Value="On" Delay="200" />
+      <Step Number="3" Lights="Black5,Black6" Value="On" Delay="200" />
+      <Step Number="4" Lights="Black3,Black4" Value="On" Delay="200" />
+      <Step Number="5" Lights="Black1,Black2" Value="On" Delay="200" />
+      <Step Number="6" Lights="White1,White2" Value="On" Delay="600" />
+      <Step Number="7" Lights="White1,White2" Value="Off" Delay="200"></Step>
+      <Step Number="8" Lights="Black1,Black2" Value="Off" Delay="200" />
+      <Step Number="9" Lights="Black3,Black4" Value="Off" Delay="200" />
+      <Step Number="10" Lights="Black5,Black6" Value="Off" Delay="200" />
+      <Step Number="11" Lights="Black7,Black8" Value="Off" Delay="200" />
+      <Step Number="12" Lights="White3,White4" Value="Off" Delay="600" />
+    </Steps>
+  </Effect>
+  <Effect Name="Bottom Up Marquee">
+    <Steps>
+      <Step Number="1" Lights="White3,White4" Value="On" Delay="200" />
+      <Step Number="2" Lights="Black7,Black8" Value="On" Delay="200" />
+      <Step Number="3" Lights="Black5,Black6" Value="On" Delay="200" />
+      <Step Number="4" Lights="Black3,Black4" Value="On" Delay="200" />
+      <Step Number="5" Lights="Black1,Black2" Value="On" Delay="200" />
+      <Step Number="6" Lights="White1,White2" Value="On" Delay="600" />
+      <Step Number="7" Lights="White1,White2" Value="Off" Delay="200"></Step>
+      <Step Number="8" Lights="Black1,Black2" Value="Off" Delay="200" />
+      <Step Number="9" Lights="Black3,Black4" Value="Off" Delay="200" />
+      <Step Number="10" Lights="Black5,Black6" Value="Off" Delay="200" />
+      <Step Number="11" Lights="Black7,Black8" Value="Off" Delay="200" />
+      <Step Number="12" Lights="White3,White4" Value="Off" Delay="600" />
+    </Steps>
+  </Effect>
+</Effects>

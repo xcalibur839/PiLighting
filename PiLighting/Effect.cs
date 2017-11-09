@@ -5,7 +5,6 @@ namespace PiLighting
 {
     class Effect
     {
-        const int MARQUEE_COUNT = 2;
         static Random random = new Random();
         LightControl Lights;
 
@@ -38,56 +37,30 @@ namespace PiLighting
 
         public void Marquee()
         {
-            int delay = 200;
-            int index = 0;
-            int[] bottomUpLightOrder = {
-                0, 2,
-                2, 6,
-                4, 5, //5 is a placeholder for now
-				1, 5,
-                0, 7,
-                1, 3
-            };
-
             Lights.Off();
-            Console.WriteLine("********** Begin Marquee Effect **********");
 
-            for (int i = 0; i < MARQUEE_COUNT; i++)
+            foreach (var effect in Config.effectConfigList)
             {
-                Lights.WhiteLights[bottomUpLightOrder[index]].isOn = !Lights.WhiteLights[bottomUpLightOrder[index++]].isOn;
-                Lights.WhiteLights[bottomUpLightOrder[index]].isOn = !Lights.WhiteLights[bottomUpLightOrder[index++]].isOn;
-                Thread.Sleep(delay);
-
-                for (int j = 0; j < 4; j++)
+                Console.WriteLine("********** Begin {0} **********", effect.Name);
+                foreach (var step in effect.Steps)
                 {
-                    Lights.BlackLights[bottomUpLightOrder[index]].isOn = !Lights.BlackLights[bottomUpLightOrder[index++]].isOn;
-                    Lights.BlackLights[bottomUpLightOrder[index]].isOn = !Lights.BlackLights[bottomUpLightOrder[index++]].isOn;
-                    Thread.Sleep(delay);
+                    foreach (var light in step.Lights)
+                    {
+                        var whiteSearch = Lights.WhiteLights.Find(x => x.Name.ToLower() == light.ToLower());
+                        var blackSearch = Lights.BlackLights.Find(x => x.Name.ToLower() == light.ToLower());
+                        if (whiteSearch != null)
+                        {
+                            whiteSearch.isOn = step.On;
+                        }
+                        if (blackSearch != null)
+                        {
+                            blackSearch.isOn = step.On;
+                        }
+                    }
+                    Thread.Sleep(step.Delay);
                 }
-
-                Lights.WhiteLights[bottomUpLightOrder[index]].isOn = !Lights.WhiteLights[bottomUpLightOrder[index++]].isOn;
-                Lights.WhiteLights[bottomUpLightOrder[index]].isOn = !Lights.WhiteLights[bottomUpLightOrder[index]].isOn;
-
-                Thread.Sleep(delay * 3);
-
-                Lights.WhiteLights[bottomUpLightOrder[index]].isOn = !Lights.WhiteLights[bottomUpLightOrder[index--]].isOn;
-                Lights.WhiteLights[bottomUpLightOrder[index]].isOn = !Lights.WhiteLights[bottomUpLightOrder[index--]].isOn;
-                Thread.Sleep(delay);
-
-                for (int j = 0; j < 4; j++)
-                {
-                    Lights.BlackLights[bottomUpLightOrder[index]].isOn = !Lights.BlackLights[bottomUpLightOrder[index--]].isOn;
-                    Lights.BlackLights[bottomUpLightOrder[index]].isOn = !Lights.BlackLights[bottomUpLightOrder[index--]].isOn;
-                    Thread.Sleep(delay);
-                }
-
-                Lights.WhiteLights[bottomUpLightOrder[index]].isOn = !Lights.WhiteLights[bottomUpLightOrder[index--]].isOn;
-                Lights.WhiteLights[bottomUpLightOrder[index]].isOn = !Lights.WhiteLights[bottomUpLightOrder[index]].isOn;
-
-                Thread.Sleep(delay * 3);
+                Console.WriteLine("********** End {0} **********", effect.Name);
             }
-
-            Console.WriteLine("********** End Marquee Effect **********");
         }
     }
 }
