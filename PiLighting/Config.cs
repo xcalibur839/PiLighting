@@ -54,6 +54,7 @@ namespace PiLighting
                 {
                     XElement configFile = XElement.Load(file);
                     SysGpioPath = configFile.Element("Program").Attribute("SysGpioPath").Value;
+
                     lightConfigList =
                         from elem in configFile.Descendants("Lights").Descendants("Light")
                         orderby elem.Attribute("Name").Value
@@ -63,6 +64,8 @@ namespace PiLighting
                             Pin = int.Parse(elem.Attribute("Pin").Value),
                             Type = (lightType) Enum.Parse(typeof(lightType), elem.Attribute("Type").Value)
                         };
+                    lightConfigList = lightConfigList.ToList(); //Execute the query and load the data.
+                                                                //This ensures exceptions loading the XML data are handled properly.
                     buttonConfigList =
                         from elem in configFile.Descendants("Buttons").Descendants("Button")
                         orderby elem.Attribute("Name").Value
@@ -71,6 +74,8 @@ namespace PiLighting
                             Name = elem.Attribute("Name").Value,
                             Pin = int.Parse(elem.Attribute("Pin").Value)
                         };
+                    buttonConfigList = buttonConfigList.ToList();
+
                     effectConfigList = new List<effectConfig>();
                     foreach(var effect in configFile.Element("Effects").Descendants("Effect"))
                     {
@@ -86,13 +91,14 @@ namespace PiLighting
                                 On = steps.Attribute("Value").Value.ToLower() == "on" ? true : false,
                                 Delay = int.Parse(steps.Attribute("Delay").Value)
                             };
+                        fxConfig.Steps = fxConfig.Steps.ToList();
                         effectConfigList.Add(fxConfig);
                     }
                     ConfigLoaded = true;
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Error loading XML data. Please try loading a different config file.");
+                    Console.WriteLine("Error loading XML data. Please check the XML file for errors or try loading a different config file.");
                     Console.WriteLine(ex.Message);
                 }
             }

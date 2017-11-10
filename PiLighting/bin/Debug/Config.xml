@@ -91,18 +91,52 @@
         <Step Number="4" Lights="White2,White4" Value="Off" Delay="600" />
       </Steps>
     </Effect>
-    <Effect Name="Full Left Right On">
-      <Steps>
-        <Step Number="1" Lights="Black1,Black3,Black5,Black7,White1,White3" Value="On" Delay="500" />
-        <Step Number="1" Lights="Black2,Black4,Black6,Black8,White2,White4" Value="On" Delay="500" />
-      </Steps>
-    </Effect> -->
     <Effect Name="Outside In">
       <Steps>
         <Step Number="1" Lights="Black1,Black3,Black5,Black7,White2,White4" Value="On" Delay="1000" />
         <Step Number="1" Lights="Black2,Black4,Black6,Black8,White1,White3" Value="On" Delay="1000" />
         <Step Number="1" Lights="Black1,Black3,Black5,Black7,White2,White4" Value="Off" Delay="1000" />
         <Step Number="1" Lights="Black2,Black4,Black6,Black8,White1,White3" Value="Off" Delay="1000" />
+      </Steps>
+    </Effect>
+    <Effect Name="Outside In">
+      <Steps>
+        <Step Number="1" Lights="Black1,Black3,Black5,Black7,White2,White4" Value="On" Delay="1000" />
+        <Step Number="1" Lights="Black2,Black4,Black6,Black8,White1,White3" Value="On" Delay="1000" />
+        <Step Number="1" Lights="Black1,Black3,Black5,Black7,White2,White4" Value="Off" Delay="1000" />
+        <Step Number="1" Lights="Black2,Black4,Black6,Black8,White1,White3" Value="Off" Delay="1000" />
+      </Steps>
+    </Effect> -->
+    <Effect Name="Checker">
+      <Steps>
+        <Step Number="1" Lights="Black1,Black4,Black5,Black8,White1,White4" Value="On" Delay="1000" />
+        <Step Number="1" Lights="Black1,Black4,Black5,Black8,White1,White4" Value="Off" Delay="0" />
+        <Step Number="1" Lights="Black2,Black3,Black6,Black7,White2,White3" Value="On" Delay="1000" />
+        <Step Number="1" Lights="Black2,Black3,Black6,Black7,White2,White3" Value="Off" Delay="0" />
+      </Steps>
+    </Effect>
+    <Effect Name="Checker">
+      <Steps>
+        <Step Number="1" Lights="Black1,Black4,Black5,Black8,White1,White4" Value="On" Delay="1000" />
+        <Step Number="1" Lights="Black1,Black4,Black5,Black8,White1,White4" Value="Off" Delay="0" />
+        <Step Number="1" Lights="Black2,Black3,Black6,Black7,White2,White3" Value="On" Delay="1000" />
+        <Step Number="1" Lights="Black2,Black3,Black6,Black7,White2,White3" Value="Off" Delay="0" />
+      </Steps>
+    </Effect>
+    <Effect Name="Checker">
+      <Steps>
+        <Step Number="1" Lights="Black1,Black4,Black5,Black8,White1,White4" Value="On" Delay="1000" />
+        <Step Number="1" Lights="Black1,Black4,Black5,Black8,White1,White4" Value="Off" Delay="0" />
+        <Step Number="1" Lights="Black2,Black3,Black6,Black7,White2,White3" Value="On" Delay="1000" />
+        <Step Number="1" Lights="Black2,Black3,Black6,Black7,White2,White3" Value="Off" Delay="0" />
+      </Steps>
+    </Effect>
+    <Effect Name="Checker Finish">
+      <Steps>
+        <Step Number="1" Lights="Black1,Black4,Black5,Black8,White1,White4" Value="On" Delay="1000" />
+        <Step Number="1" Lights="Black1,Black4,Black5,Black8,White1,White4" Value="Off" Delay="0" />
+        <Step Number="1" Lights="Black2,Black3,Black6,Black7,White2,White3" Value="On" Delay="1000" />
+        <Step Number="1" Lights="Black2,Black3,Black6,Black7,White2,White3" Value="Off" Delay="1000" />
       </Steps>
     </Effect>
   </Effects>

@@ -24,14 +24,21 @@ namespace PiLighting
             {
                 foreach (var light in Config.lightConfigList)
                 {
-                    Console.WriteLine("Found a {0} light: {1}({2})", light.Type.ToString(), light.Name, light.Pin);
-                    if (light.Type == lightType.black)
+                    try
                     {
-                        BlackLights.Add(new PinControl(light.Pin, true, light.Name));
+                        Console.WriteLine("Found a {0} light: {1}({2})", light.Type.ToString(), light.Name, light.Pin);
+                        if (light.Type == lightType.black)
+                        {
+                            BlackLights.Add(new PinControl(light.Pin, true, light.Name));
+                        }
+                        else if (light.Type == lightType.white)
+                        {
+                            WhiteLights.Add(new PinControl(light.Pin, true, light.Name));
+                        }
                     }
-                    else if (light.Type == lightType.white)
+                    catch
                     {
-                        WhiteLights.Add(new PinControl(light.Pin, true, light.Name));
+                        Console.WriteLine("Could not load all lights. Please check Config XML file for errors.");
                     }
                 }
             }
